@@ -53,7 +53,9 @@ class BackOffRequest(object):
         [0,2^r], maximum interval [0,256]"""
         with self.__lock:
             duration = random.random() * 2 ** min(self.__retries, 8)
-            self.__next_req = time.time() + duration
+            self.__next_req = time.time() + 1 
+            #duration
+            logger.warning('Retrying in 1 sec')
 
     def _wait(self):
         with self.__lock:
